@@ -4,8 +4,8 @@
   "description": "Next redux app",
   "author": "zhbhun",
   "license": "MIT",
-  "homepage": "https://github.com/zhbhun/next-mobile",
-  "repository": "https://github.com/zhbhun/next-mobile/tree/master/packages/next-app-redux",
+  "homepage": "https://github.com/zhbhun/next-app",
+  "repository": "https://github.com/zhbhun/next-app/tree/master/packages/next-app-redux",
   "files": [
     "lib"
   ],
