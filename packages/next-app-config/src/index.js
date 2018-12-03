@@ -1,8 +1,8 @@
 const merge = require('lodash/merge');
 const withPlugins = require('next-compose-plugins');
 const withImages = require('next-images');
-const withCSS = require('../../vendors/next-css');
-const withSass = require('../../vendors/next-sass');
+const withCSS = require('../vendors/next-css');
+const withSass = require('../vendors/next-sass');
 const withNative = require('./withNative');
 
 const defaultConfig = require('./defaultConfig');
