@@ -1,0 +1,6 @@
+{
+  "extends": "eslint-config-ease-react",
+  "env": {
+    "node": true
+  }
+}

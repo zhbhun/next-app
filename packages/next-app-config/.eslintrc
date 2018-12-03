@@ -1,0 +1,6 @@
+{
+  "extends": "eslint-config-ease-base",
+  "env": {
+    "node": true
+  }
+}

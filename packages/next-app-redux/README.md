@@ -1,0 +1,2 @@
+- https://github.com/bmealhouse/next-redux-saga
+- https://github.com/kirill-konshin/next-redux-wrapper
