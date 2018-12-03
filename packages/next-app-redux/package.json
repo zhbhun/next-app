@@ -1,6 +1,6 @@
 {
   "name": "@next-app/redux",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Next redux app",
   "author": "zhbhun",
   "license": "MIT",
@@ -30,8 +30,8 @@
   },
   "dependencies": {
     "nprogress": "^0.2.0",
-    "redux": "^4.0.0",
     "react-redux": "^5.0.0",
+    "redux": "^4.0.0",
     "redux-saga": "^0.16.0",
     "url": "^0.11.0"
   },
