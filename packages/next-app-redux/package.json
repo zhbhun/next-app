@@ -101,5 +101,8 @@
       ]
     ],
     "sourceType": "unambiguous"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
