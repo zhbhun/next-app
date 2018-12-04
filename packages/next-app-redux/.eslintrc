@@ -1,6 +1,11 @@
 {
   "extends": "eslint-config-ease-react",
   "env": {
+    "browser": true,
     "node": true
+  },
+  "rules": {
+    "no-return-assign": 0,
+    "react/no-unused-state": 0
   }
 }

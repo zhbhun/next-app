@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { END } from 'redux-saga';
+import { END } from 'redumd/saga';
 
 function hoc(config) {
   return BaseComponent => {

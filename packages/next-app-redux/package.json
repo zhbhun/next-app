@@ -7,7 +7,10 @@
   "homepage": "https://github.com/zhbhun/next-app",
   "repository": "https://github.com/zhbhun/next-app/tree/master/packages/next-app-redux",
   "files": [
-    "lib"
+    "lib",
+    "redumd.js",
+    "redux.js",
+    "saga"
   ],
   "main": "lib/index.js",
   "scripts": {
@@ -26,13 +29,16 @@
     ]
   },
   "peerDependencies": {
+    "@next-app/config": "^0.1.0",
     "react": "^16.0.0"
   },
   "dependencies": {
+    "@babel/runtime-corejs2": "^7.0.0",
     "nprogress": "^0.2.0",
     "react-redux": "^5.0.0",
     "redux": "^4.0.0",
     "redux-saga": "^0.16.0",
+    "redumd": "^1.0.0",
     "url": "^0.11.0"
   },
   "devDependencies": {

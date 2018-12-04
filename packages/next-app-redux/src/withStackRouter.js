@@ -38,31 +38,64 @@ export default App => {
 
     componentWillReceiveProps(nextProps) {
       const { Component, pageProps, ...restProps } = nextProps;
-      const currRoute = this.state.routes[this.state.current];
-      const currRouteKey = Number(currRoute.key);
-      const nextRouteKey = Number(getRouteKey(nextProps.router.query._));
-      if (currRouteKey !== nextRouteKey) {
-        let current = this.state.current;
-        const routeKeys = this.state.routeKeys.slice(0);
-        const routes = this.state.routes.map(route =>
-          cloneElement(route, {
-            style: {
-              ...styles.page,
-              ...((route.key || '0') === String(nextRouteKey)
-                ? styles.activePage
-                : {}),
-            },
-          })
-        );
-        let existIndex = -1;
-        const isExist = this.state.routes.some((route, index) => {
-          if (Number(route.key) === nextRouteKey) {
-            existIndex = index;
-            return true;
+      this.setState(state => {
+        const currRoute = state.routes[state.current];
+        const currRouteKey = Number(currRoute.key);
+        const nextRouteKey = Number(getRouteKey(nextProps.router.query._));
+        if (currRouteKey !== nextRouteKey) {
+          let current = state.current;
+          const routeKeys = state.routeKeys.slice(0);
+          const routes = state.routes.map(route =>
+            cloneElement(route, {
+              style: {
+                ...styles.page,
+                ...((route.key || '0') === String(nextRouteKey)
+                  ? styles.activePage
+                  : {}),
+              },
+            })
+          );
+          let existIndex = -1;
+          const isExist = state.routes.some((route, index) => {
+            if (Number(route.key) === nextRouteKey) {
+              existIndex = index;
+              return true;
+            }
+            return false;
+          });
+          if (!isExist) {
+            const newRoute = (
+              <section
+                key={nextRouteKey}
+                data-key={nextRouteKey}
+                style={{ ...styles.page, ...styles.activePage }}
+              >
+                <Component {...restProps} {...pageProps} />
+              </section>
+            );
+            if (nextRouteKey > currRouteKey) {
+              current += 1;
+              routeKeys.splice(
+                current,
+                routeKeys.length - current,
+                String(nextRouteKey)
+              );
+              routes.splice(current, routes.length - current, newRoute);
+            } else {
+              routeKeys.splice(current, routeKeys.length, String(nextRouteKey));
+              routes.splice(current, routes.length, newRoute);
+            }
+          } else {
+            current = existIndex;
+            routeKeys.splice(existIndex + 1, routeKeys.length);
+            routes.splice(existIndex + 1, routes.length);
           }
-          return false;
-        });
-        if (!isExist) {
+          return {
+            current,
+            routeKeys,
+            routes,
+          };
+        } else {
           const newRoute = (
             <section
               key={nextRouteKey}
@@ -72,103 +105,75 @@ export default App => {
               <Component {...restProps} {...pageProps} />
             </section>
           );
-          if (nextRouteKey > currRouteKey) {
-            current += 1;
-            routeKeys.splice(
-              current,
-              routeKeys.length - current,
-              String(nextRouteKey)
-            );
-            routes.splice(current, routes.length - current, newRoute);
-          } else {
-            routeKeys.splice(current, routeKeys.length, String(nextRouteKey));
-            routes.splice(current, routes.length, newRoute);
-          }
-        } else {
-          current = existIndex;
-          routeKeys.splice(existIndex + 1, routeKeys.length);
-          routes.splice(existIndex + 1, routes.length);
+          const routes = state.routes.slice(0);
+          routes.splice(state.current, 1, newRoute);
+          return { routes };
         }
-        this.setState({
-          current,
-          routeKeys,
-          routes,
-        });
-      } else {
-        const newRoute = (
-          <section
-            key={nextRouteKey}
-            data-key={nextRouteKey}
-            style={{ ...styles.page, ...styles.activePage }}
-          >
-            <Component {...restProps} {...pageProps} />
-          </section>
-        );
-        const routes = this.state.routes.slice(0);
-        routes.splice(this.state.current, 1, newRoute);
-        this.setState({ routes });
-      }
+      });
     }
 
     onBeforeHistoryChange = newURL => {
       const router = url.parse(newURL, true);
-      const currRoute = this.state.routes[this.state.current];
-      const currRouteKey = Number(currRoute.key);
-      const nextRouteKey = Number(getRouteKey(router.query._));
-      if (currRouteKey !== nextRouteKey) {
-        let current = this.state.current;
-        const routeKeys = this.state.routeKeys.slice(0);
-        const routes = this.state.routes.map(route =>
-          cloneElement(route, {
-            style: {
-              ...styles.page,
-              ...((route.key || '0') === String(nextRouteKey)
-                ? styles.activePage
-                : {}),
-            },
-          })
-        );
-        let existIndex = -1;
-        const isExist = this.state.routes.some((route, index) => {
-          if (Number(route.key) === nextRouteKey) {
-            existIndex = index;
-            return true;
-          }
-          return false;
-        });
-        if (!isExist) {
-          const newRoute = (
-            <section
-              key={nextRouteKey}
-              data-key={nextRouteKey}
-              style={{ ...styles.page, ...styles.activePage }}
-            >
-              <div />
-            </section>
+      this.setState(state => {
+        const currRoute = state.routes[state.current];
+        const currRouteKey = Number(currRoute.key);
+        const nextRouteKey = Number(getRouteKey(router.query._));
+        if (currRouteKey !== nextRouteKey) {
+          let current = state.current;
+          const routeKeys = state.routeKeys.slice(0);
+          const routes = state.routes.map(route =>
+            cloneElement(route, {
+              style: {
+                ...styles.page,
+                ...((route.key || '0') === String(nextRouteKey)
+                  ? styles.activePage
+                  : {}),
+              },
+            })
           );
-          if (nextRouteKey > currRouteKey) {
-            current += 1;
-            routeKeys.splice(
-              current,
-              routeKeys.length - current,
-              String(nextRouteKey)
+          let existIndex = -1;
+          const isExist = state.routes.some((route, index) => {
+            if (Number(route.key) === nextRouteKey) {
+              existIndex = index;
+              return true;
+            }
+            return false;
+          });
+          if (!isExist) {
+            const newRoute = (
+              <section
+                key={nextRouteKey}
+                data-key={nextRouteKey}
+                style={{ ...styles.page, ...styles.activePage }}
+              >
+                <div />
+              </section>
             );
-            routes.splice(current, routes.length - current, newRoute);
+            if (nextRouteKey > currRouteKey) {
+              current += 1;
+              routeKeys.splice(
+                current,
+                routeKeys.length - current,
+                String(nextRouteKey)
+              );
+              routes.splice(current, routes.length - current, newRoute);
+            } else {
+              routeKeys.splice(current, routeKeys.length, String(nextRouteKey));
+              routes.splice(current, routes.length, newRoute);
+            }
           } else {
-            routeKeys.splice(current, routeKeys.length, String(nextRouteKey));
-            routes.splice(current, routes.length, newRoute);
+            current = existIndex;
+            routeKeys.splice(existIndex + 1, routeKeys.length);
+            routes.splice(existIndex + 1, routes.length);
           }
-        } else {
-          current = existIndex;
-          routeKeys.splice(existIndex + 1, routeKeys.length);
-          routes.splice(existIndex + 1, routes.length);
+          return {
+            current,
+            routeKeys,
+            routes,
+          };
         }
-        this.setState({
-          current,
-          routeKeys,
-          routes,
-        });
-      }
+        return {};
+      });
     };
 
     onRouteChangeStart = () => NProgress.start();
