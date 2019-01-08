@@ -1,7 +1,7 @@
 import url from 'url';
 import NProgress from 'nprogress';
 import Router from 'next/router';
-import React, { cloneElement, PureComponent } from 'react';
+import React, { Children, cloneElement, PureComponent } from 'react';
 
 const getRouteKey = key => key || '0';
 
@@ -23,7 +23,7 @@ export default App => {
             data-key={routeKey}
             style={{ ...styles.page, ...styles.activePage }}
           >
-            <Component {...restProps} {...pageProps} />
+            <Component {...restProps} {...pageProps} visible />
           </section>,
         ],
       };
@@ -53,6 +53,9 @@ export default App => {
                   ? styles.activePage
                   : {}),
               },
+              children: cloneElement(Children.only(route.props.children), {
+                visible: (route.key || '0') === String(nextRouteKey),
+              }),
             })
           );
           let existIndex = -1;
@@ -70,7 +73,7 @@ export default App => {
                 data-key={nextRouteKey}
                 style={{ ...styles.page, ...styles.activePage }}
               >
-                <Component {...restProps} {...pageProps} />
+                <Component {...restProps} {...pageProps} visible />
               </section>
             );
             if (nextRouteKey > currRouteKey) {
@@ -102,7 +105,7 @@ export default App => {
               data-key={nextRouteKey}
               style={{ ...styles.page, ...styles.activePage }}
             >
-              <Component {...restProps} {...pageProps} />
+              <Component {...restProps} {...pageProps} visible />
             </section>
           );
           const routes = state.routes.slice(0);
@@ -129,6 +132,9 @@ export default App => {
                   ? styles.activePage
                   : {}),
               },
+              children: cloneElement(Children.only(route.props.children), {
+                visible: (route.key || '0') === String(nextRouteKey),
+              }),
             })
           );
           let existIndex = -1;

@@ -28,7 +28,7 @@ export default ({
     }
 
     render() {
-      return <ConnectedPage models={this.props.models} />;
+      return <ConnectedPage {...this.props} />;
     }
   }
   return WrappedPage;
