@@ -112,6 +112,14 @@ export default (makeStore, config = {}) => {
           models: modelsNs,
           initialState: config.serializeState(store.getState()),
           initialProps,
+          headers: {
+            userAgent:
+              (isServer
+                ? appCtx.ctx.req &&
+                  appCtx.ctx.req.get &&
+                  appCtx.ctx.req.get('User-Agent')
+                : window.navigator.userAgent) || '',
+          },
         };
       };
 
