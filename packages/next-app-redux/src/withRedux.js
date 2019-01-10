@@ -66,7 +66,10 @@ export default (makeStore, config = {}) => {
         const modelsNs = Object.keys(appCtx.Component.models || {}).reduce(
           (rcc, key) => {
             const Model = appCtx.Component.models[key];
-            const model = new Model(appCtx.ctx.query._ || '0');
+            const model =
+              typeof Model === 'function'
+                ? new Model(appCtx.ctx.query._ || '0')
+                : Model;
             modelArray.push(model);
             rcc[key] = model.namespace;
             modelMap[key] = model;
@@ -132,9 +135,12 @@ export default (makeStore, config = {}) => {
         const hasStore = store && 'dispatch' in store && 'getState' in store;
         const modelArray = [];
         const models = Object.keys(modelsNs).reduce((rcc, key) => {
+          const Model = props.Component.models[key];
           const model =
             (hasStore && store.model(modelsNs[key])) ||
-            new props.Component.models[key](props.router.query._ || '0');
+            (typeof Model === 'function'
+              ? new Model(props.router.query._ || '0')
+              : Model);
           modelArray.push(model);
           rcc[key] = model;
           return rcc;
