@@ -38,7 +38,7 @@
     "next-routes": "^1.4.2",
     "nprogress": "^0.2.0",
     "react-redux": "^5.0.0",
-    "redumd": "^1.4.0",
+    "redumd": "^1.5.0",
     "redux": "^4.0.0",
     "redux-saga": "^0.16.0",
     "url": "^0.11.0"
