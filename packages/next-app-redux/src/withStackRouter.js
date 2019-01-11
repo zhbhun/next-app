@@ -23,7 +23,7 @@ export default App => {
             data-key={routeKey}
             style={{ ...styles.page, ...styles.activePage }}
           >
-            <Component {...restProps} {...pageProps} visible />
+            <Component {...restProps} {...pageProps} router={router} visible />
           </section>,
         ],
       };
@@ -73,7 +73,12 @@ export default App => {
                 data-key={nextRouteKey}
                 style={{ ...styles.page, ...styles.activePage }}
               >
-                <Component {...restProps} {...pageProps} visible />
+                <Component
+                  {...restProps}
+                  {...pageProps}
+                  router={nextProps.router}
+                  visible
+                />
               </section>
             );
             if (nextRouteKey > currRouteKey) {
@@ -105,7 +110,12 @@ export default App => {
               data-key={nextRouteKey}
               style={{ ...styles.page, ...styles.activePage }}
             >
-              <Component {...restProps} {...pageProps} visible />
+              <Component
+                {...restProps}
+                {...pageProps}
+                router={nextProps.router}
+                visible
+              />
             </section>
           );
           const routes = state.routes.slice(0);
