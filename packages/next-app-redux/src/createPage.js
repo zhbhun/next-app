@@ -22,6 +22,11 @@ export default ({
     static getInitialProps = getInitialProps;
 
     componentWillUnmount() {
+      this.destroyModels();
+    }
+
+    destroyModels() {
+      // TODO _app 热加载时会重建 App 组件，销毁当前页面组件且卸载对应 models，导致新的路由页面组件的 models 不存在
       this.props.store.unmodel(
         Object.keys(this.props.models).map(key => this.props.models[key])
       );

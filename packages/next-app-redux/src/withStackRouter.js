@@ -104,6 +104,20 @@ export default App => {
             routes,
           };
         } else {
+          if (
+            this.props.Component.__route === Component.__route &&
+            this.props.Component !== Component
+          ) {
+            // 处理热加载情况
+            this.props.Component.prototype.destroyModels = () => null;
+            const modelArray = Object.keys(Component.models || {}).map(key => {
+              const Model = Component.models[key];
+              return typeof Model === 'function'
+                ? new Model(nextRouteKey || '0')
+                : Model;
+            });
+            this.props.store.model(modelArray);
+          }
           const newRoute = (
             <section
               key={nextRouteKey}
