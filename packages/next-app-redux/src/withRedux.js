@@ -142,7 +142,7 @@ export default (makeStore, config = {}) => {
        * @param {Object} props
        * @param {Object} props.Component
        * @param {Object} props.headers 请求头
-       * @param {Object} props.initiateState 初始化状态
+       * @param {Object} props.initialState 初始化状态
        * @param {Object} props.initialProps 初始化属性
        * @param {Object} props.router
        * @param {Function} props.store 获取服务端 store，首屏渲染时客户端不会调用 getInitiateProps，所以 store 为 undefined
@@ -167,7 +167,7 @@ export default (makeStore, config = {}) => {
           clearStore(config); // 清除 Store 缓存（热更新时可能会出现 Store 缓存）
           store = initStore({
             makeStore,
-            initialState: props.initiateState,
+            initialState: props.initialState,
             config,
             models: modelArray,
           });
