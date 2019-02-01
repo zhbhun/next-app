@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { END } from 'redumd/saga';
 import { createModels } from './utils';
 
 // eslint-disable-next-line
@@ -39,6 +40,10 @@ const initStore = ({ makeStore, initialState, config, ctx = {}, models }) => {
 const clearStore = config => {
   if (!isServer) {
     const { storeKey } = config;
+    const store = window[storeKey];
+    if (store && store.dispatch) {
+      store.dispatch(END);
+    }
     window[storeKey] = undefined;
   }
 };
