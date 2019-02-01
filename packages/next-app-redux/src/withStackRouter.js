@@ -125,6 +125,13 @@ export default App => {
       });
     }
 
+    componentWillUnmount() {
+      Router.events.off('beforeHistoryChange', this.onBeforeHistoryChange);
+      Router.events.off('routeChangeStart', this.onRouteChangeStart);
+      Router.events.off('routeChangeComplete', this.onRouteChangeComplete);
+      Router.events.off('routeChangeError', this.onRouteChangeError);
+    }
+
     onBeforeHistoryChange = newURL => {
       const router = url.parse(newURL, true);
       this.setState(state => {
