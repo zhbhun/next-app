@@ -38,7 +38,7 @@
     "ignore-loader": "0.1.2",
     "lodash": "^4.17.11",
     "mini-css-extract-plugin": "0.4.3",
-    "next": "https://cdn.jsdelivr.net/gh/zhbhun/next.js@7.0.3-beta.5/next.tgz",
+    "next": "https://cdn.jsdelivr.net/gh/zhbhun/next.js@7.0.3-beta.6/next.tgz",
     "next-compose-plugins": "^2.1.1",
     "next-images": "^1.0.1",
     "node-sass": "^4.7.2",
