@@ -195,25 +195,6 @@ export default (makeStore, config = {}) => {
         ) {
           this.models = nextProps.models();
         }
-        if (process.env.NODE_ENV === 'development') {
-          // 处理路由页面组件热更新，更新 Model 实例
-          const currKey = this.props.router.query._ || '0';
-          const currRoute = this.props.router.route;
-          const currComponent = this.props.Component;
-          const nextKey = nextProps.router.query._ || '0';
-          const nextRoute = nextProps.router.route;
-          const nextComponent = nextProps.Component;
-          if (
-            currKey === nextKey &&
-            currRoute === nextRoute &&
-            nextProps.Component !== currComponent
-          ) {
-            const models = createModels(nextComponent.models, nextProps.router);
-            this.store.model(Object.keys(models || {}).map(key => models[key]));
-            currComponent.prototype.destroyModels = () => null;
-            this.models = models;
-          }
-        }
       }
 
       render() {

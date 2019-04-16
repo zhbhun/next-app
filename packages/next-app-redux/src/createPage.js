@@ -26,9 +26,15 @@ export default ({
     }
 
     destroyModels() {
-      // TODO _app 热加载时会重建 App 组件，销毁当前页面组件且卸载对应 models，导致新的路由页面组件的 models 不存在
       this.props.store.unmodel(
-        Object.keys(this.props.models).map(key => this.props.models[key])
+        Object.keys(this.props.models).reduce((rcc, key) => {
+          const model = this.props.models[key];
+          const Model = Object.getPrototypeOf(model).constructor;
+          if (!Model.persist) {
+            rcc.push(model);
+          }
+          return rcc;
+        }, [])
       );
     }
 
