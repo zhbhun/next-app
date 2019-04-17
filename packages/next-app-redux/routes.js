@@ -1,1 +1,1 @@
-module.exports = require('next-routes');
+module.exports = require('./lib/next-routes');

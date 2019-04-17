@@ -35,8 +35,8 @@
   },
   "dependencies": {
     "@babel/runtime-corejs2": "^7.0.0",
-    "next-routes": "^1.4.2",
     "nprogress": "^0.2.0",
+    "path-to-regexp": "^2.1.0",
     "react-redux": "^5.0.0",
     "redumd": "^1.7.0",
     "redux": "^4.0.0",
