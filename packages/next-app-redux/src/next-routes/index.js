@@ -2,11 +2,11 @@
 /**
  * @see https://github.com/fridays/next-routes/tree/1.4.2
  */
-const pathToRegexp = require('path-to-regexp')
-const React = require('react')
-const {parse} = require('url')
-const NextLink = require('next/link')
-const NextRouter = require('next/router')
+import pathToRegexp from 'path-to-regexp'
+import React from 'react'
+import {parse} from 'url'
+import NextLink from 'next/link'
+import NextRouter from 'next/router'
 
 module.exports = opts => new Routes(opts)
 
