@@ -3,6 +3,7 @@ const withPlugins = require('next-compose-plugins');
 const withImages = require('next-images');
 const withCSS = require('../vendors/next-css');
 const withSass = require('../vendors/next-sass');
+const withBundleAnalyzer = require('../vendors/next-bundle-analyzer');
 const withNative = require('./withNative');
 
 const defaultConfig = require('./defaultConfig');
@@ -36,6 +37,7 @@ module.exports = (config = defaultConfig) => {
     config === defaultConfig ? defaultConfig : merge({}, defaultConfig, config);
   const {
     distDir,
+    analyzer,
     assetPrefix,
     inlineImageLimit,
     cssLocalIdentName,
@@ -46,6 +48,12 @@ module.exports = (config = defaultConfig) => {
   };
   return withPlugins(
     [
+      [
+        withBundleAnalyzer,
+        {
+          analyzer,
+        },
+      ],
       [
         withImages,
         {
