@@ -1,6 +1,6 @@
 {
   "name": "@next-app/config",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Next config for app",
   "author": "zhbhun",
   "license": "MIT",
@@ -30,7 +30,6 @@
     ]
   },
   "dependencies": {
-    "next-devdep": "7.0.3-beta.1",
     "autoprefixer": "^9.3.1",
     "css-loader": "1.0.0",
     "cssnano": "^4.1.7",
@@ -40,6 +39,7 @@
     "lodash": "^4.17.11",
     "mini-css-extract-plugin": "0.4.3",
     "next-compose-plugins": "^2.1.1",
+    "next-devdep": "7.0.3-beta.1",
     "next-images": "^1.0.1",
     "node-sass": "^4.7.2",
     "postcss-loader": "3.0.0",
