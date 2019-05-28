@@ -30,6 +30,7 @@
     ]
   },
   "dependencies": {
+    "next-devdep": "7.0.3-beta.1",
     "autoprefixer": "^9.3.1",
     "css-loader": "1.0.0",
     "cssnano": "^4.1.7",
