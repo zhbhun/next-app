@@ -30,7 +30,6 @@
     ]
   },
   "peerDependencies": {
-    "@next-app/config": "^0.1.0",
     "react": "^16.0.0"
   },
   "dependencies": {
