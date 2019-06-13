@@ -17,11 +17,9 @@ function hoc(config) {
         }
 
         // Keep saga running on the client (async mode)
-        if (config.async && !isServer) {
+        if (!isServer && config.async) {
           return pageProps;
-        }
-
-        if (!isServer && models) {
+        } else if (models) {
           await Promise.all(
             Object.keys(models).reduce((rcc, modeKey) => {
               const model = models[modeKey];
@@ -38,16 +36,14 @@ function hoc(config) {
               return rcc;
             }, [])
           );
-          return pageProps;
         }
 
-        // Force saga to end in all other cases
-        store.dispatch(END);
-        await store.sagaTask.done;
-
-        // Restart saga on the client (sync mode)
         if (!isServer) {
-          store.runSagaTask();
+          return pageProps;
+        } else {
+          // Force saga to end in all other cases
+          store.dispatch(END);
+          await store.sagaTask.done;
         }
 
         return pageProps;
