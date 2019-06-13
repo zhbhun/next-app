@@ -34,7 +34,7 @@ const removeModelsCache = key => {
  */
 export const createModels = (Component, router) => {
   const models = Component.models || {};
-  const modelkey = getModelKey();
+  const modelkey = getModelKey(router);
   let modelsMap = isClient && getModelsCache(modelkey, Component);
   if (!modelsMap) {
     if (typeof models === 'function') {
