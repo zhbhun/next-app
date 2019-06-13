@@ -94,7 +94,7 @@ export default (makeStore, config = {}) => {
         if (!appCtx.ctx) throw new Error('No page context');
 
         // model
-        const modelMap = createModels(appCtx.Component.models, appCtx.ctx);
+        const modelMap = createModels(appCtx.Component, appCtx.ctx);
         const modelArray = Object.keys(modelMap || {}).map(
           key => modelMap[key]
         );
@@ -167,7 +167,7 @@ export default (makeStore, config = {}) => {
           models = models();
         } else {
           // 客户端首屏不会执行 App.getInitiateProps，需要在这里初始化 Store
-          models = createModels(props.Component.models, props.router);
+          models = createModels(props.Component, props.router);
           const modelArray = Object.keys(models || {}).map(key => models[key]);
           clearStore(config); // 清除 Store 缓存（热更新时可能会出现 Store 缓存）
           store = initStore({
