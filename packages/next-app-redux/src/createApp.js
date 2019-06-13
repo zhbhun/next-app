@@ -5,7 +5,22 @@ import withRedux from './withRedux';
 import withReduxSaga from './withReduxSaga';
 import withStackRouter from './withStackRouter';
 
-export default createStore => {
+const defaultConfig = {
+  async: true,
+};
+
+export default options => {
+  let createStore;
+  let config = defaultConfig;
+  if (typeof options === 'function') {
+    createStore = options;
+  } else {
+    createStore = options.createStore;
+    config = {
+      ...defaultConfig,
+      ...options,
+    };
+  }
   class MYApp extends App {
     static async getInitialProps(props) {
       const { Component, ctx } = props;
@@ -27,6 +42,6 @@ export default createStore => {
   }
 
   return withRedux(createStore)(
-    withReduxSaga({ async: false })(withStackRouter(MYApp))
+    withReduxSaga({ async: config.async })(withStackRouter(MYApp))
   );
 };
