@@ -112,6 +112,7 @@ export default (makeStore, config = {}) => {
         }
 
         // 上下文更新
+        appCtx.ctx.isServer = isServer;
         appCtx.ctx.store = store;
         appCtx.ctx.models = modelMap;
 
