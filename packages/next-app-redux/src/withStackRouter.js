@@ -30,8 +30,8 @@ export default App => {
     }
 
     componentDidMount() {
+      NProgress.configure({ showSpinner: false });
       Router.events.on('beforeHistoryChange', this.onBeforeHistoryChange);
-      Router.events.on('routeChangeStart', this.onRouteChangeStart);
       Router.events.on('routeChangeComplete', this.onRouteChangeComplete);
       Router.events.on('routeChangeError', this.onRouteChangeError);
     }
@@ -127,7 +127,6 @@ export default App => {
 
     componentWillUnmount() {
       Router.events.off('beforeHistoryChange', this.onBeforeHistoryChange);
-      Router.events.off('routeChangeStart', this.onRouteChangeStart);
       Router.events.off('routeChangeComplete', this.onRouteChangeComplete);
       Router.events.off('routeChangeError', this.onRouteChangeError);
     }
@@ -163,6 +162,7 @@ export default App => {
             return false;
           });
           if (!isExist) {
+            this.onRouteChangeStart();
             const newRoute = (
               <section
                 key={nextRouteKey}
@@ -194,6 +194,12 @@ export default App => {
             routeKeys,
             routes,
           };
+        } else {
+          // eslint-disable-next-line
+          if (window.location.pathname !== router.pathname) {
+            // 判断当前路由地址是否变更，有的话需要显示加载进度条
+            this.onRouteChangeStart();
+          }
         }
         return {};
       });
