@@ -6,7 +6,7 @@ import withReduxSaga from './withReduxSaga';
 import withStackRouter from './withStackRouter';
 
 const defaultConfig = {
-  async: true,
+  async: false,
 };
 
 export default options => {

@@ -21,23 +21,6 @@ export default ({
 
     static getInitialProps = getInitialProps;
 
-    componentWillUnmount() {
-      this.destroyModels();
-    }
-
-    destroyModels() {
-      this.props.store.unmodel(
-        Object.keys(this.props.models).reduce((rcc, key) => {
-          const model = this.props.models[key];
-          const Model = Object.getPrototypeOf(model).constructor;
-          if (!Model.persist) {
-            rcc.push(model);
-          }
-          return rcc;
-        }, [])
-      );
-    }
-
     render() {
       return <ConnectedPage {...this.props} />;
     }

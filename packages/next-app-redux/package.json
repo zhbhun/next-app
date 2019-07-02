@@ -8,6 +8,7 @@
   "repository": "https://github.com/zhbhun/next-app/tree/master/packages/next-app-redux",
   "files": [
     "lib",
+    "index.css",
     "redumd.js",
     "redux.js",
     "routes.js",
