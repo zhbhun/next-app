@@ -7,7 +7,7 @@ const getRouteKey = key => key || '0';
 const RoutePage = ({ Component, visible, ...restProps }) => {
   return (
     <section className={`next-route${visible ? ' next-route-active' : ''}`}>
-      {Component ? <Component {...restProps} visible /> : null}
+      {Component ? <Component {...restProps} visible={visible} /> : null}
     </section>
   );
 };
