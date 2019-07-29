@@ -42,6 +42,11 @@ export default options => {
   }
 
   return withRedux(createStore)(
-    withReduxSaga({ async: config.async })(withStackRouter(MYApp))
+    withReduxSaga({ async: config.async })(
+      withStackRouter({
+        App: MYApp,
+        RouterContainer: config.RouterContainer,
+      })
+    )
   );
 };

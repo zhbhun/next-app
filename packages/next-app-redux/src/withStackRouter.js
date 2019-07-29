@@ -36,7 +36,7 @@ const destroyRoutes = (routes, store) => {
   }
 };
 
-export default App => {
+export default ({ App, RouterContainer }) => {
   class StackRouter extends PureComponent {
     static getInitialProps = App.getInitialProps;
 
@@ -174,11 +174,14 @@ export default App => {
     onRouteChangeError = () => NProgress.done();
 
     render() {
-      return (
-        <App {...this.props}>
-          <div>{this.state.routes}</div>
-        </App>
-      );
+      const { current, routes } = this.state;
+      let content = null;
+      if (RouterContainer) {
+        content = <RouterContainer current={current}>{routes}</RouterContainer>;
+      } else {
+        content = <div>{routes}</div>;
+      }
+      return <App {...this.props}>{content}</App>;
     }
   }
 
