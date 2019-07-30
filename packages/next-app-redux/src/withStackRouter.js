@@ -4,10 +4,10 @@ import Router from 'next/router';
 import React, { cloneElement, PureComponent } from 'react';
 
 const getRouteKey = key => key || '0';
-const RoutePage = ({ Component, visible, ...restProps }) => {
+const RoutePage = ({ children, Component, visible, ...restProps }) => {
   return (
     <section className={`next-route${visible ? ' next-route-active' : ''}`}>
-      {Component ? <Component {...restProps} visible={visible} /> : null}
+      {Component ? <Component {...restProps} visible={visible} /> : children}
     </section>
   );
 };
