@@ -110,10 +110,11 @@ class Routes {
       const {byName, urls: {as, href}} = this.findAndGetUrls(route, params)
       return Router[method](href, as, byName ? options : params)
     }
-
+    const reloadRoute = wrap('reload')
     Router.pushRoute = wrap('push')
     Router.replaceRoute = wrap('replace')
     Router.prefetchRoute = wrap('prefetch')
+    Router.reloadRoute = route => reloadRoute(route || window.location.pathname)
     return Router
   }
 }
@@ -149,7 +150,8 @@ class Route {
   }
 
   getHref (params = {}) {
-    return `${this.page}?${toQuerystring(params)}`
+    const query = toQuerystring(params)
+    return `${this.page}${query ? '?' : ''}${query}`
   }
 
   getAs (params = {}) {
