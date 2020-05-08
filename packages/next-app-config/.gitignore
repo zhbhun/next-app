@@ -77,3 +77,4 @@ typings/
 
 # Project
 /lib/**
+package-lock.json
