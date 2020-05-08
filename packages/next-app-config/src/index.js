@@ -1,24 +1,24 @@
 const merge = require('lodash/merge');
 const withPlugins = require('next-compose-plugins');
 const withImages = require('next-images');
-const withCSS = require('../vendors/next-css');
-const withSass = require('../vendors/next-sass');
+// const withCSS = require('../vendors/next-css');
+// const withSass = require('../vendors/next-sass');
 const withBundleAnalyzer = require('../vendors/next-bundle-analyzer');
 const withNative = require('./withNative');
 
 const defaultConfig = require('./defaultConfig');
 
-const postcssPlugins = () => {
-  const plugins = [require('autoprefixer')()];
-  if (process.env.NODE_ENV !== 'development') {
-    plugins.push(
-      require('cssnano')({
-        preset: 'default',
-      })
-    );
-  }
-  return plugins;
-};
+// const postcssPlugins = () => {
+//   const plugins = [require('autoprefixer')()];
+//   if (process.env.NODE_ENV !== 'development') {
+//     plugins.push(
+//       require('cssnano')({
+//         preset: 'default',
+//       })
+//     );
+//   }
+//   return plugins;
+// };
 
 /**
  * @param {Object} config
@@ -40,12 +40,12 @@ module.exports = (config = defaultConfig) => {
     analyzer,
     assetPrefix,
     inlineImageLimit,
-    cssLocalIdentName,
+    // cssLocalIdentName,
     native,
   } = merge({}, config, config.env[process.env.NODE_ENV]);
-  const postcssLoaderOptions = {
-    plugins: postcssPlugins(),
-  };
+  // const postcssLoaderOptions = {
+  //   plugins: postcssPlugins(),
+  // };
   return withPlugins(
     [
       [
@@ -61,28 +61,28 @@ module.exports = (config = defaultConfig) => {
           inlineImageLimit,
         },
       ],
-      [
-        withCSS,
-        {
-          cssLoaderOptions: {
-            url: true,
-            import: false,
-            localIdentName: cssLocalIdentName,
-          },
-          postcssLoaderOptions,
-        },
-      ],
-      [
-        withSass,
-        {
-          cssLoaderOptions: {
-            url: true,
-            import: false,
-            localIdentName: cssLocalIdentName,
-          },
-          postcssLoaderOptions,
-        },
-      ],
+      // [
+      //   withCSS,
+      //   {
+      //     cssLoaderOptions: {
+      //       url: true,
+      //       import: false,
+      //       localIdentName: cssLocalIdentName,
+      //     },
+      //     postcssLoaderOptions,
+      //   },
+      // ],
+      // [
+      //   withSass,
+      //   {
+      //     cssLoaderOptions: {
+      //       url: true,
+      //       import: false,
+      //       localIdentName: cssLocalIdentName,
+      //     },
+      //     postcssLoaderOptions,
+      //   },
+      // ],
       [withNative, { native }],
     ],
     {
