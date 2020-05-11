@@ -32,6 +32,7 @@
   "dependencies": {
     "lodash": "^4.17.11",
     "next-compose-plugins": "^2.1.1",
+    "next-devdep": "9.3.6-beta.0",
     "next-images": "^1.0.1",
     "node-sass": "^4.14.1",
     "webpack-bundle-analyzer": "^3.7.0",
